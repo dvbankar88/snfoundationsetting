@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SN Group Foundation - CRM Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .sidebar-item:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .receipt-preview {
+            border: 2px dashed #e5e7eb;
+            min-height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <span class="text-purple-600 font-bold text-xl">SN</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">SN Group Foundation</h1>
+                        <p class="text-purple-100">CRM Settings Portal</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-purple-100">Admin Panel</span>
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                        <span class="text-purple-600 font-semibold">A</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg">
+            <nav class="mt-6">
+                <div class="px-6 py-3">
+                    <h3 class="text-gray-500 text-xs font-semibold uppercase tracking-wider">Settings Modules</h3>
+                </div>
+                <div class="space-y-1">
+                    <button onclick="showTab('user-management')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>👥</span>
+                        <span>User Management</span>
+                    </button>
+                    <button onclick="showTab('role-access')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>🔐</span>
+                        <span>Role & Access Control</span>
+                    </button>
+                    <button onclick="showTab('receipt-designer')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>🧾</span>
+                        <span>Receipt Designer</span>
+                    </button>
+                    <button onclick="showTab('auto-numbering')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>🔢</span>
+                        <span>Auto Numbering</span>
+                    </button>
+                    <button onclick="showTab('email-setup')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>📧</span>
+                        <span>Email Setup</span>
+                    </button>
+                    <button onclick="showTab('master-settings')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>📊</span>
+                        <span>Master Settings</span>
+                    </button>
+                    <button onclick="showTab('ngo-profile')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>🏢</span>
+                        <span>NGO Profile</span>
+                    </button>
+                    <button onclick="showTab('module-config')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>⚙️</span>
+                        <span>Module Configuration</span>
+                    </button>
+                    <button onclick="showTab('security-settings')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>🔒</span>
+                        <span>Security Settings</span>
+                    </button>
+                    <button onclick="showTab('audit-logs')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>📋</span>
+                        <span>Audit Logs</span>
+                    </button>
+                    <button onclick="showTab('backup-restore')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>💾</span>
+                        <span>Backup & Restore</span>
+                    </button>
+                    <button onclick="showTab('settings-dashboard')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:text-white transition-all duration-200 flex items-center space-x-3">
+                        <span>📊</span>
+                        <span>Settings Dashboard</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <!-- User Management Tab -->
+            <div id="user-management" class="tab-content active">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">User Management</h2>
+                    <p class="text-gray-600">Create and manage sub-admin accounts with specific permissions</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Add New User Form -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Add New User</h3>
+                        <form id="userForm" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Enter full name">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Unique login ID">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email ID</label>
+                                    <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="user@example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Mobile Number</label>
+                                    <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="+91 9876543210">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Designation</label>
+                                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                        <option>Finance Manager</option>
+                                        <option>Accountant</option>
+                                        <option>Volunteer Coordinator</option>
+                                        <option>Program Manager</option>
+                                        <option>Data Entry Operator</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Role Type</label>
+                                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                        <option>Admin</option>
+                                        <option>Manager</option>
+                                        <option>Accountant</option>
+                                        <option>Viewer</option>
+                                        <option>Custom Role</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                <div class="flex space-x-2">
+                                    <input type="password" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Enter password">
+                                    <button type="button" onclick="generatePassword()" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">Generate</button>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="checkbox" id="sendEmail" class="rounded text-purple-600">
+                                <label for="sendEmail" class="text-sm text-gray-700">Send credentials via email</label>
+                            </div>
+                            <button type="submit" class="w-full gradient-bg text-white py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold">Save User</button>
+                        </form>
+                    </div>
+
+                    <!-- Existing Users List -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Existing Users</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                        <span class="text-purple-600 font-semibold">JD</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">John Doe</p>
+                                        <p class="text-sm text-gray-600">Finance Manager • Admin</p>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1 bg-blue-100 text-blue-600 rounded text-sm hover:bg-blue-200 transition-colors">Edit</button>
+                                    <button class="px-3 py-1 bg-red-100 text-red-600 rounded text-sm hover:bg-red-200 transition-colors">Deactivate</button>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                        <span class="text-green-600 font-semibold">SM</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-800">Sarah Miller</p>
+                                        <p class="text-sm text-gray-600">Accountant • Manager</p>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="px-3 py-1 bg-blue-100 text-blue-600 rounded text-sm hover:bg-blue-200 transition-colors">Edit</button>
+                                    <button class="px-3 py-1 bg-red-100 text-red-600 rounded text-sm hover:bg-red-200 transition-colors">Deactivate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Role & Access Control Tab -->
+            <div id="role-access" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Role & Access Control</h2>
+                    <p class="text-gray-600">Define module permissions for different user roles</p>
+                </div>
+
+                <div class="bg-white rounded-lg card-shadow p-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-4 px-4 font-semibold text-gray-800">Module</th>
+                                    <th class="text-center py-4 px-4 font-semibold text-gray-800">Admin</th>
+                                    <th class="text-center py-4 px-4 font-semibold text-gray-800">Manager</th>
+                                    <th class="text-center py-4 px-4 font-semibold text-gray-800">Accountant</th>
+                                    <th class="text-center py-4 px-4 font-semibold text-gray-800">Viewer</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="py-4 px-4 font-medium text-gray-800">Donor Management</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Full Control</option>
+                                            <option>Add/Edit/View</option>
+                                            <option>View Only</option>
+                                            <option>No Access</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Add/Edit/View</option>
+                                            <option>View Only</option>
+                                            <option>No Access</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Add/View</option>
+                                            <option>View Only</option>
+                                            <option>No Access</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>View Only</option>
+                                            <option>No Access</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-medium text-gray-800">Offline Donations</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Full Control</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Add/Edit/View</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Add/View</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>View Only</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-medium text-gray-800">Event Management</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Full Control</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Add/Edit/View</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>View Only</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>View Only</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-medium text-gray-800">Expense Management</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Full Control</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Add/Edit/View</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Add/View</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>No Access</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-medium text-gray-800">Reports</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>Full Control</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>View Only</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>View Only</option>
+                                        </select>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">
+                                        <select class="px-2 py-1 border rounded text-sm">
+                                            <option>No Access</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-6 flex justify-end">
+                        <button onclick="savePermissions()" class="gradient-bg text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity font-semibold">Save Permissions</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Receipt Designer Tab -->
+            <div id="receipt-designer" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Receipt Format Designer</h2>
+                    <p class="text-gray-600">Customize receipt templates for donations and 80G certificates</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Designer Controls -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Design Settings</h3>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Receipt Type</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>Offline Donations</option>
+                                    <option>Website Donations</option>
+                                    <option>80G Receipts</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Template Style</label>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <button onclick="selectTemplate('classic')" class="template-btn p-3 border-2 border-gray-300 rounded-lg text-center hover:border-purple-500 transition-colors">
+                                        <div class="w-full h-16 bg-gray-100 rounded mb-2"></div>
+                                        <span class="text-sm">Classic</span>
+                                    </button>
+                                    <button onclick="selectTemplate('modern')" class="template-btn p-3 border-2 border-purple-500 rounded-lg text-center">
+                                        <div class="w-full h-16 bg-purple-100 rounded mb-2"></div>
+                                        <span class="text-sm">Modern</span>
+                                    </button>
+                                    <button onclick="selectTemplate('compact')" class="template-btn p-3 border-2 border-gray-300 rounded-lg text-center hover:border-purple-500 transition-colors">
+                                        <div class="w-full h-16 bg-blue-100 rounded mb-2"></div>
+                                        <span class="text-sm">Compact</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Organization Logo</label>
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                    <div class="w-16 h-16 bg-gray-200 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                                        <span class="text-gray-500">📷</span>
+                                    </div>
+                                    <button class="text-purple-600 hover:text-purple-700 font-medium">Upload Logo</button>
+                                    <p class="text-xs text-gray-500 mt-1">PNG, JPG up to 2MB</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Header Text</label>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" rows="3" placeholder="SN Group Foundation&#10;Donation Receipt">SN Group Foundation
+Donation Receipt</textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Footer Text</label>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" rows="2" placeholder="Thank you for your generous donation">Thank you for your generous donation</textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Include Fields</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">Donor Name & Address</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">PAN Number</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">Donation Purpose</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">80G Declaration</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">QR Code for Verification</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">Authorized Signature</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button onclick="updatePreview()" class="w-full gradient-bg text-white py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold">Update Preview</button>
+                        </div>
+                    </div>
+
+                    <!-- Live Preview -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Live Preview</h3>
+                        <div class="receipt-preview bg-white p-6 rounded-lg">
+                            <div class="text-center mb-6">
+                                <div class="w-16 h-16 bg-purple-100 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                                    <span class="text-purple-600 font-bold text-xl">SN</span>
+                                </div>
+                                <h2 class="text-xl font-bold text-gray-800">SN Group Foundation</h2>
+                                <p class="text-gray-600">Donation Receipt</p>
+                            </div>
+                            
+                            <div class="border-t border-b border-gray-200 py-4 mb-4">
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <p class="font-semibold">Receipt No:</p>
+                                        <p class="text-gray-600">SNG-2024-001</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold">Date:</p>
+                                        <p class="text-gray-600">15 Jan 2024</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <p class="font-semibold text-sm mb-2">Donor Details:</p>
+                                <p class="text-sm text-gray-700">John Doe</p>
+                                <p class="text-sm text-gray-600">123 Main Street, City - 400001</p>
+                                <p class="text-sm text-gray-600">PAN: ABCDE1234F</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <p class="font-semibold text-sm mb-2">Donation Details:</p>
+                                <div class="flex justify-between text-sm">
+                                    <span>Amount:</span>
+                                    <span class="font-semibold">₹5,000</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-1">Purpose: Education Support</p>
+                            </div>
+
+                            <div class="border-t border-gray-200 pt-4 text-center">
+                                <p class="text-xs text-gray-600 mb-2">This donation is eligible for 80G tax benefits</p>
+                                <p class="text-sm text-gray-700 font-medium">Thank you for your generous donation</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex space-x-3">
+                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">Download PDF</button>
+                            <button onclick="saveReceiptTemplate()" class="flex-1 gradient-bg text-white py-2 rounded-lg hover:opacity-90 transition-opacity">Save Template</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auto Numbering Tab -->
+            <div id="auto-numbering" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Auto Numbering System</h2>
+                    <p class="text-gray-600">Configure automatic numbering for receipts, invoices, and other documents</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Numbering Configuration</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Document Type</label>
+                                <select id="docType" onchange="updatePrefix()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option value="OFF">Offline Donations</option>
+                                    <option value="WEB">Website Donations</option>
+                                    <option value="80G">80G Certificates</option>
+                                    <option value="EVT">Event Vouchers</option>
+                                    <option value="EXP">Expense Vouchers</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Prefix</label>
+                                <input type="text" id="prefixInput" value="OFF" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="OFF">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Year Format</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>2024 (Full Year)</option>
+                                    <option>24 (Short Year)</option>
+                                    <option>2023-24 (Financial Year)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Starting Number</label>
+                                <input type="number" value="1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Number Length</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>3 digits (001)</option>
+                                    <option>4 digits (0001)</option>
+                                    <option>5 digits (00001)</option>
+                                </select>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <p class="text-sm font-medium text-gray-700 mb-2">Preview Format:</p>
+                                <p id="previewFormat" class="text-lg font-mono text-purple-600">OFF-2025-0001</p>
+                            </div>
+                            <button class="w-full gradient-bg text-white py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold">Save Configuration</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Current Sequences</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div>
+                                    <p class="font-semibold text-gray-800">Offline Donations</p>
+                                    <p class="text-sm text-gray-600">Format: OFF-2025-XXXX</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold text-purple-600">0156</p>
+                                    <p class="text-xs text-gray-500">Last used</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div>
+                                    <p class="font-semibold text-gray-800">Website Donations</p>
+                                    <p class="text-sm text-gray-600">Format: WEB-2025-XXXX</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold text-purple-600">0089</p>
+                                    <p class="text-xs text-gray-500">Last used</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div>
+                                    <p class="font-semibold text-gray-800">80G Certificates</p>
+                                    <p class="text-sm text-gray-600">Format: 80G-2025-XXXX</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold text-purple-600">0067</p>
+                                    <p class="text-xs text-gray-500">Last used</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div>
+                                    <p class="font-semibold text-gray-800">Event Vouchers</p>
+                                    <p class="text-sm text-gray-600">Format: EVT-2025-XXXX</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold text-purple-600">0023</p>
+                                    <p class="text-xs text-gray-500">Last used</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                                <div>
+                                    <p class="font-semibold text-gray-800">Expense Vouchers</p>
+                                    <p class="text-sm text-gray-600">Format: EXP-2025-XXXX</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold text-purple-600">0034</p>
+                                    <p class="text-xs text-gray-500">Last used</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Setup Tab -->
+            <div id="email-setup" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Email Configuration</h2>
+                    <p class="text-gray-600">Configure SMTP settings and email templates for automated communications</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">SMTP Settings</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">SMTP Server</label>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="smtp.gmail.com">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Port</label>
+                                    <input type="number" value="587" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Security</label>
+                                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                        <option>TLS</option>
+                                        <option>SSL</option>
+                                        <option>None</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                                <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="noreply@sngroupfoundation.org">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="App Password">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">From Name</label>
+                                <input type="text" value="SN Group Foundation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <button onclick="testEmail()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">Test Connection</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">SMS Configuration</h3>
+                        <div class="space-y-4 mb-8">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">SMS Gateway Provider</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>TextLocal</option>
+                                    <option>MSG91</option>
+                                    <option>Fast2SMS</option>
+                                    <option>Twilio</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">API Key</label>
+                                <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Enter SMS API Key">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Sender ID</label>
+                                <input type="text" value="SNGFND" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="SNGFND">
+                            </div>
+                            <button onclick="testSMS()" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors font-semibold">Test SMS</button>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Email Templates</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-800">Welcome Email</h4>
+                                    <button class="text-blue-600 hover:text-blue-700 text-sm">Edit</button>
+                                </div>
+                                <p class="text-sm text-gray-600">Sent to new users when account is created</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-800">Donation Receipt</h4>
+                                    <button class="text-blue-600 hover:text-blue-700 text-sm">Edit</button>
+                                </div>
+                                <p class="text-sm text-gray-600">Sent with donation receipts to donors</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-800">Event Reminder</h4>
+                                    <button class="text-blue-600 hover:text-blue-700 text-sm">Edit</button>
+                                </div>
+                                <p class="text-sm text-gray-600">Sent before upcoming events</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-800">Monthly Newsletter</h4>
+                                    <button class="text-blue-600 hover:text-blue-700 text-sm">Edit</button>
+                                </div>
+                                <p class="text-sm text-gray-600">Monthly updates to all subscribers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Master Settings Tab -->
+            <div id="master-settings" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Master Settings</h2>
+                    <p class="text-gray-600">Maintain dropdown lists and master data used across the CRM</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Program/Project Master -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Program / Project Master</h3>
+                        <div class="space-y-4">
+                            <div class="flex space-x-2">
+                                <input type="text" id="newProgram" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Add new program">
+                                <button onclick="addProgram()" class="px-4 py-2 gradient-bg text-white rounded-lg hover:opacity-90 transition-opacity">Add</button>
+                            </div>
+                            <div class="space-y-2 max-h-64 overflow-y-auto">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Education Support</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Health Aid</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Tree Plantation</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Women Empowerment</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Disaster Relief</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Donation Type Master -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Donation Type Master</h3>
+                        <div class="space-y-4">
+                            <div class="flex space-x-2">
+                                <input type="text" id="newDonationType" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Add donation type">
+                                <button onclick="addDonationType()" class="px-4 py-2 gradient-bg text-white rounded-lg hover:opacity-90 transition-opacity">Add</button>
+                            </div>
+                            <div class="space-y-2 max-h-64 overflow-y-auto">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">General Fund</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Education Aid</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Medical Emergency</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Infrastructure</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Event Sponsorship</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expense Category Master -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Expense Category Master</h3>
+                        <div class="space-y-4">
+                            <div class="flex space-x-2">
+                                <input type="text" id="newExpenseCategory" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Add expense category">
+                                <button onclick="addExpenseCategory()" class="px-4 py-2 gradient-bg text-white rounded-lg hover:opacity-90 transition-opacity">Add</button>
+                            </div>
+                            <div class="space-y-2 max-h-64 overflow-y-auto">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Venue Rental</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Food & Catering</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Transportation</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Printing & Stationery</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Marketing & Promotion</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <span class="text-gray-800">Office Supplies</span>
+                                    <button class="text-red-600 hover:text-red-700 text-sm">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NGO Profile Tab -->
+            <div id="ngo-profile" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">NGO Organization Profile</h2>
+                    <p class="text-gray-600">Maintain your organization's official identity and branding information</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Basic Information -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Basic Information</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">NGO Name</label>
+                                <input type="text" value="SN Group Foundation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Registration Number</label>
+                                    <input type="text" value="REG/2020/001234" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">PAN Number</label>
+                                    <input type="text" value="AABCS1234F" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">80G Number</label>
+                                    <input type="text" value="80G/2020/001234" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">12A Number</label>
+                                    <input type="text" value="12A/2020/001234" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" rows="3">123 Foundation Street, NGO Colony, Mumbai - 400001, Maharashtra, India</textarea>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                    <input type="email" value="info@sngroupfoundation.org" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                                    <input type="tel" value="+91 9876543210" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Website URL</label>
+                                <input type="url" value="https://www.sngroupfoundation.org" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bank Details & Logo -->
+                    <div class="space-y-8">
+                        <!-- Bank Details -->
+                        <div class="bg-white rounded-lg card-shadow p-6">
+                            <h3 class="text-xl font-semibold mb-6 text-gray-800">Bank Details</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Account Name</label>
+                                    <input type="text" value="SN Group Foundation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Account Number</label>
+                                    <input type="text" value="1234567890123456" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">IFSC Code</label>
+                                        <input type="text" value="HDFC0001234" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Bank Name</label>
+                                        <input type="text" value="HDFC Bank" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Branch Address</label>
+                                    <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500" rows="2">Main Branch, Commercial Street, Mumbai - 400001</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Logo Upload -->
+                        <div class="bg-white rounded-lg card-shadow p-6">
+                            <h3 class="text-xl font-semibold mb-6 text-gray-800">Organization Logo</h3>
+                            <div class="text-center">
+                                <div class="w-32 h-32 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-purple-600 font-bold text-4xl">SN</span>
+                                </div>
+                                <button class="gradient-bg text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity font-semibold">Upload New Logo</button>
+                                <p class="text-xs text-gray-500 mt-2">PNG, JPG up to 5MB. Recommended: 300x300px</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button onclick="saveNGOProfile()" class="gradient-bg text-white px-8 py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold">Save Profile</button>
+                </div>
+            </div>
+
+            <!-- Security Settings Tab -->
+            <div id="security-settings" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Security Settings</h2>
+                    <p class="text-gray-600">Configure security features to protect sensitive donor and financial data</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Password & Authentication -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Password & Authentication</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Password Encryption</p>
+                                    <p class="text-sm text-gray-600">Encrypt all user passwords with AES-256</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked disabled class="sr-only peer">
+                                    <div class="w-11 h-6 bg-green-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Two-Factor Authentication</p>
+                                    <p class="text-sm text-gray-600">Enable 2FA via Email or SMS OTP</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">2FA Method</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>Email OTP</option>
+                                    <option>SMS OTP</option>
+                                    <option>Both Email & SMS</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Password Reset Method</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="resetMethod" checked class="text-purple-600 mr-3">
+                                        <span class="text-sm">Email Link (Secure)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="resetMethod" class="text-purple-600 mr-3">
+                                        <span class="text-sm">SMS OTP</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="resetMethod" class="text-purple-600 mr-3">
+                                        <span class="text-sm">Security Questions</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Session & Access Control -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Session & Access Control</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Session Timeout</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>15 minutes</option>
+                                    <option>30 minutes</option>
+                                    <option>1 hour</option>
+                                    <option>2 hours</option>
+                                    <option>4 hours</option>
+                                    <option>Never</option>
+                                </select>
+                                <p class="text-xs text-gray-500 mt-1">Auto logout after inactivity</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">IP Tracking</p>
+                                    <p class="text-sm text-gray-600">Track IP addresses for admin logins</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Login Notifications</p>
+                                    <p class="text-sm text-gray-600">Email alerts for new device logins</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Failed Login Attempts</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>3 attempts</option>
+                                    <option>5 attempts</option>
+                                    <option>10 attempts</option>
+                                    <option>Unlimited</option>
+                                </select>
+                                <p class="text-xs text-gray-500 mt-1">Lock account after failed attempts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login History -->
+                <div class="mt-8 bg-white rounded-lg card-shadow p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Recent Login History</h3>
+                        <button onclick="downloadLoginReport()" class="gradient-bg text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">Download Report</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">User</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">Login Time</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">IP Address</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">Device</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="py-3 px-4 font-medium">Admin</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">2024-01-15 14:30:25</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">192.168.1.100</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Chrome/Windows</td>
+                                    <td class="py-3 px-4">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Success</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium">John Doe</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">2024-01-15 13:45:12</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">192.168.1.105</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Firefox/Mac</td>
+                                    <td class="py-3 px-4">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Success</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-medium">Unknown</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">2024-01-15 12:20:33</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">203.45.67.89</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Chrome/Android</td>
+                                    <td class="py-3 px-4">
+                                        <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Failed</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button onclick="saveSecuritySettings()" class="gradient-bg text-white px-8 py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold">Save Security Settings</button>
+                </div>
+            </div>
+
+            <!-- Module Configuration Tab -->
+            <div id="module-config" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Module Configuration</h2>
+                    <p class="text-gray-600">Control advanced behavior and settings for each CRM module</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Donation Settings -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Donation Module Settings</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Enable 80G Section</p>
+                                    <p class="text-sm text-gray-600">Show 80G tax benefit options in donation forms</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Make PAN Mandatory</p>
+                                    <p class="text-sm text-gray-600">Require PAN for donations above ₹2000</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Enable QR Code Verification</p>
+                                    <p class="text-sm text-gray-600">Add QR codes to receipts for verification</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Allow Receipt Editing</p>
+                                    <p class="text-sm text-gray-600">Admin can edit receipts after saving</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Enable Revised Receipts</p>
+                                    <p class="text-sm text-gray-600">Allow creating revised versions (R1, R2)</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Settings -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">System Settings</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Default Currency</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>INR (₹)</option>
+                                    <option>USD ($)</option>
+                                    <option>EUR (€)</option>
+                                    <option>GBP (£)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Date Format</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>DD/MM/YYYY</option>
+                                    <option>MM/DD/YYYY</option>
+                                    <option>YYYY-MM-DD</option>
+                                    <option>DD-MM-YYYY</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Time Zone</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>Asia/Kolkata (IST)</option>
+                                    <option>UTC</option>
+                                    <option>America/New_York</option>
+                                    <option>Europe/London</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Financial Year Start</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                    <option>April 1st</option>
+                                    <option>January 1st</option>
+                                    <option>July 1st</option>
+                                    <option>October 1st</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-gray-800">Auto Backup</p>
+                                    <p class="text-sm text-gray-600">Automatically backup data daily</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button onclick="saveModuleConfig()" class="gradient-bg text-white px-8 py-3 rounded-lg hover:opacity-90 transition-opacity font-semibold">Save Configuration</button>
+                </div>
+            </div>
+
+            <!-- Backup & Restore Tab -->
+            <div id="backup-restore" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Backup & Restore</h2>
+                    <p class="text-gray-600">Export and import system configuration to protect your customized setup</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Export Settings -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Export Configuration</h3>
+                        <div class="space-y-6">
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-blue-600 text-2xl mr-3">💾</span>
+                                    <h4 class="font-semibold text-blue-800">Complete System Backup</h4>
+                                </div>
+                                <p class="text-sm text-blue-700 mb-4">Export all settings, configurations, and templates as a single backup file</p>
+                                <button onclick="exportAllSettings()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">Export All Settings</button>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h4 class="font-semibold text-gray-800">Selective Export</h4>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">User Management & Roles</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">Receipt Templates</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">Auto Numbering Configuration</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">Email & SMS Settings</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">Master Data Lists</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">NGO Profile Information</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded text-purple-600 mr-3">
+                                        <span class="text-sm">Security Settings</span>
+                                    </label>
+                                </div>
+                                <button onclick="exportSelectedSettings()" class="w-full gradient-bg text-white py-2 rounded-lg hover:opacity-90 transition-opacity font-semibold">Export Selected</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Import & Restore -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Import & Restore</h3>
+                        <div class="space-y-6">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                <div class="w-16 h-16 bg-gray-200 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                                    <span class="text-gray-500 text-2xl">📁</span>
+                                </div>
+                                <p class="text-gray-600 mb-3">Drop backup file here or click to browse</p>
+                                <button onclick="selectBackupFile()" class="gradient-bg text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity font-semibold">Select Backup File</button>
+                                <p class="text-xs text-gray-500 mt-2">Supports .json, .backup files</p>
+                            </div>
+
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="text-yellow-600 text-xl mr-2">⚠️</span>
+                                    <h4 class="font-semibold text-yellow-800">Import Options</h4>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="importMode" checked class="text-yellow-600 mr-3">
+                                        <span class="text-sm">Merge with existing settings</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="importMode" class="text-yellow-600 mr-3">
+                                        <span class="text-sm">Replace all settings (destructive)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                <div class="flex items-center mb-3">
+                                    <span class="text-red-600 text-xl mr-2">🔄</span>
+                                    <h4 class="font-semibold text-red-800">Factory Reset</h4>
+                                </div>
+                                <p class="text-sm text-red-700 mb-3">Restore all settings to default values. This action cannot be undone.</p>
+                                <button onclick="confirmFactoryReset()" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors font-semibold">Restore to Default</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backup History -->
+                <div class="mt-8 bg-white rounded-lg card-shadow p-6">
+                    <h3 class="text-xl font-semibold mb-6 text-gray-800">Backup History</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                    <span class="text-green-600">✓</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Complete System Backup</p>
+                                    <p class="text-sm text-gray-600">January 15, 2024 at 2:30 PM • 2.4 MB</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 bg-blue-100 text-blue-600 rounded text-sm hover:bg-blue-200 transition-colors">Download</button>
+                                <button class="px-3 py-1 bg-green-100 text-green-600 rounded text-sm hover:bg-green-200 transition-colors">Restore</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <span class="text-blue-600">📄</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Receipt Templates Only</p>
+                                    <p class="text-sm text-gray-600">January 12, 2024 at 11:15 AM • 0.8 MB</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 bg-blue-100 text-blue-600 rounded text-sm hover:bg-blue-200 transition-colors">Download</button>
+                                <button class="px-3 py-1 bg-green-100 text-green-600 rounded text-sm hover:bg-green-200 transition-colors">Restore</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <span class="text-purple-600">⚙️</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Auto Backup (Scheduled)</p>
+                                    <p class="text-sm text-gray-600">January 10, 2024 at 12:00 AM • 2.1 MB</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 bg-blue-100 text-blue-600 rounded text-sm hover:bg-blue-200 transition-colors">Download</button>
+                                <button class="px-3 py-1 bg-green-100 text-green-600 rounded text-sm hover:bg-green-200 transition-colors">Restore</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audit Logs Tab -->
+            <div id="audit-logs" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Audit Logs</h2>
+                    <p class="text-gray-600">Track all system activities and user actions for security and compliance</p>
+                </div>
+
+                <div class="bg-white rounded-lg card-shadow p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex space-x-4">
+                            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                <option>All Activities</option>
+                                <option>User Login</option>
+                                <option>Data Changes</option>
+                                <option>System Settings</option>
+                            </select>
+                            <input type="date" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        <button class="gradient-bg text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">Export Logs</button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">Timestamp</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">User</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">Action</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">Module</th>
+                                    <th class="text-left py-3 px-4 font-semibold text-gray-800">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="py-3 px-4 text-sm text-gray-600">2024-01-15 14:30:25</td>
+                                    <td class="py-3 px-4 text-sm font-medium">John Doe</td>
+                                    <td class="py-3 px-4">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Created</span>
+                                    </td>
+                                    <td class="py-3 px-4 text-sm">Donations</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">New donation record #SNG-2024-156</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm text-gray-600">2024-01-15 14:25:10</td>
+                                    <td class="py-3 px-4 text-sm font-medium">Sarah Miller</td>
+                                    <td class="py-3 px-4">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Updated</span>
+                                    </td>
+                                    <td class="py-3 px-4 text-sm">Donors</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Modified donor contact information</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm text-gray-600">2024-01-15 14:20:45</td>
+                                    <td class="py-3 px-4 text-sm font-medium">Admin</td>
+                                    <td class="py-3 px-4">
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded-full text-xs">Login</span>
+                                    </td>
+                                    <td class="py-3 px-4 text-sm">System</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">User logged in from IP: 192.168.1.100</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm text-gray-600">2024-01-15 13:45:30</td>
+                                    <td class="py-3 px-4 text-sm font-medium">John Doe</td>
+                                    <td class="py-3 px-4">
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Exported</span>
+                                    </td>
+                                    <td class="py-3 px-4 text-sm">Reports</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Downloaded monthly donation report</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-sm text-gray-600">2024-01-15 13:30:15</td>
+                                    <td class="py-3 px-4 text-sm font-medium">Sarah Miller</td>
+                                    <td class="py-3 px-4">
+                                        <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Deleted</span>
+                                    </td>
+                                    <td class="py-3 px-4 text-sm">Events</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">Removed cancelled event "Charity Walk 2024"</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between">
+                        <p class="text-sm text-gray-600">Showing 1-5 of 247 entries</p>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
+                            <button class="px-3 py-1 gradient-bg text-white rounded text-sm">1</button>
+                            <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">2</button>
+                            <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">3</button>
+                            <button class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>
+                        </div>
+                    </div>
+            <!-- Settings Dashboard Tab -->
+            <div id="settings-dashboard" class="tab-content">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Settings Dashboard</h2>
+                    <p class="text-gray-600">Real-time insights and quick access to configuration management</p>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Total Users</p>
+                                <p class="text-2xl font-bold text-gray-900">12</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <span class="text-blue-600 text-xl">👥</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Active Templates</p>
+                                <p class="text-2xl font-bold text-gray-900">5</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <span class="text-green-600 text-xl">🧾</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Number Series</p>
+                                <p class="text-2xl font-bold text-gray-900">5</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <span class="text-purple-600 text-xl">🔢</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-600">Recent Changes</p>
+                                <p class="text-2xl font-bold text-gray-900">8</p>
+                            </div>
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                                <span class="text-orange-600 text-xl">📝</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Quick Actions</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <button onclick="showTab('user-management')" class="p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all duration-200 text-center">
+                                <div class="text-2xl mb-2">👤</div>
+                                <p class="font-medium text-gray-800">Add User</p>
+                            </button>
+                            <button onclick="showTab('receipt-designer')" class="p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all duration-200 text-center">
+                                <div class="text-2xl mb-2">🎨</div>
+                                <p class="font-medium text-gray-800">Edit Template</p>
+                            </button>
+                            <button onclick="showTab('auto-numbering')" class="p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all duration-200 text-center">
+                                <div class="text-2xl mb-2">🔢</div>
+                                <p class="font-medium text-gray-800">Change Prefix</p>
+                            </button>
+                            <button onclick="showTab('audit-logs')" class="p-4 border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all duration-200 text-center">
+                                <div class="text-2xl mb-2">📋</div>
+                                <p class="font-medium text-gray-800">View Logs</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-800">Recent Setting Changes</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <span class="text-green-600 text-sm">+</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-800">Added Sub Admin: Sarah Miller</p>
+                                    <p class="text-xs text-gray-600">2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <span class="text-blue-600 text-sm">✏️</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-800">Updated Receipt Format: Added QR Section</p>
+                                    <p class="text-xs text-gray-600">5 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <span class="text-purple-600 text-sm">🔢</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-800">Changed Auto Number Prefix: OFF to OFFD</p>
+                                    <p class="text-xs text-gray-600">1 day ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                    <span class="text-orange-600 text-sm">📧</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-800">Updated SMTP Configuration</p>
+                                    <p class="text-xs text-gray-600">2 days ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Users by Role Chart -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Users by Role</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-purple-500 rounded"></div>
+                                    <span class="text-sm text-gray-700">Admin</span>
+                                </div>
+                                <span class="text-sm font-medium">3</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full" style="width: 25%"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-blue-500 rounded"></div>
+                                    <span class="text-sm text-gray-700">Manager</span>
+                                </div>
+                                <span class="text-sm font-medium">4</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 33%"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-green-500 rounded"></div>
+                                    <span class="text-sm text-gray-700">Accountant</span>
+                                </div>
+                                <span class="text-sm font-medium">3</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 25%"></div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-4 h-4 bg-yellow-500 rounded"></div>
+                                    <span class="text-sm text-gray-700">Viewer</span>
+                                </div>
+                                <span class="text-sm font-medium">2</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-500 h-2 rounded-full" style="width: 17%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module Access Split -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Module Access Split</h3>
+                        <div class="relative">
+                            <div class="w-32 h-32 mx-auto mb-4">
+                                <svg viewBox="0 0 42 42" class="w-full h-full">
+                                    <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#e5e7eb" stroke-width="3"></circle>
+                                    <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="40 60" stroke-dashoffset="25"></circle>
+                                    <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#3b82f6" stroke-width="3" stroke-dasharray="25 75" stroke-dashoffset="15"></circle>
+                                    <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#10b981" stroke-width="3" stroke-dasharray="20 80" stroke-dashoffset="40"></circle>
+                                    <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#f59e0b" stroke-width="3" stroke-dasharray="15 85" stroke-dashoffset="60"></circle>
+                                </svg>
+                            </div>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+                                        <span>Full Access</span>
+                                    </div>
+                                    <span>40%</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                        <span>Limited</span>
+                                    </div>
+                                    <span>25%</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                        <span>View Only</span>
+                                    </div>
+                                    <span>20%</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                        <span>No Access</span>
+                                    </div>
+                                    <span>15%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Timeline -->
+                    <div class="bg-white rounded-lg card-shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800">Settings Changes (7 Days)</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">Mon</span>
+                                <div class="flex-1 mx-3">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                <span class="font-medium">6</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">Tue</span>
+                                <div class="flex-1 mx-3">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                                <span class="font-medium">3</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">Wed</span>
+                                <div class="flex-1 mx-3">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <span class="font-medium">8</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">Thu</span>
+                                <div class="flex-1 mx-3">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                                <span class="font-medium">2</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">Fri</span>
+                                <div class="flex-1 mx-3">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                                <span class="font-medium">5</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">Sat</span>
+                                <div class="flex-1 mx-3">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 10%"></div>
+                                    </div>
+                                </div>
+                                <span class="font-medium">1</span>
+                            </div>
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-gray-600">Sun</span>
+                                <div class="flex-1 mx-3">
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <span class="font-medium">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active state from all sidebar items
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            sidebarItems.forEach(item => {
+                item.classList.remove('gradient-bg', 'text-white');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active state to clicked sidebar item
+            event.target.closest('.sidebar-item').classList.add('gradient-bg', 'text-white');
+        }
+
+        // User form submission
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('User created successfully! Login credentials have been sent via email.');
+            this.reset();
+        });
+
+        // Generate password function
+        function generatePassword() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            let password = '';
+            for (let i = 0; i < 12; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.querySelector('input[type="password"]').value = password;
+        }
+
+        // Save permissions function
+        function savePermissions() {
+            alert('Permissions saved successfully! All users will see updated access levels immediately.');
+        }
+
+        // Template selection
+        function selectTemplate(template) {
+            const buttons = document.querySelectorAll('.template-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-purple-500');
+                btn.classList.add('border-gray-300');
+            });
+            event.target.closest('.template-btn').classList.remove('border-gray-300');
+            event.target.closest('.template-btn').classList.add('border-purple-500');
+        }
+
+        // Update preview function
+        function updatePreview() {
+            alert('Preview updated! You can see how your receipt will look with the current settings.');
+        }
+
+        // Save receipt template
+        function saveReceiptTemplate() {
+            alert('Receipt template saved successfully! This design will be used for all future receipts.');
+        }
+
+        // Test email function
+        function testEmail() {
+            alert('Testing email connection... Connection successful! SMTP settings are working properly.');
+        }
+
+        // Test SMS function
+        function testSMS() {
+            alert('Testing SMS connection... SMS sent successfully! Gateway is working properly.');
+        }
+
+        // Update prefix based on document type
+        function updatePrefix() {
+            const docType = document.getElementById('docType').value;
+            const prefixInput = document.getElementById('prefixInput');
+            const previewFormat = document.getElementById('previewFormat');
+            
+            prefixInput.value = docType;
+            previewFormat.textContent = `${docType}-2025-0001`;
+        }
+
+        // Master data functions
+        function addProgram() {
+            const input = document.getElementById('newProgram');
+            if (input.value.trim()) {
+                alert(`Program "${input.value}" added successfully!`);
+                input.value = '';
+            }
+        }
+
+        function addDonationType() {
+            const input = document.getElementById('newDonationType');
+            if (input.value.trim()) {
+                alert(`Donation type "${input.value}" added successfully!`);
+                input.value = '';
+            }
+        }
+
+        function addExpenseCategory() {
+            const input = document.getElementById('newExpenseCategory');
+            if (input.value.trim()) {
+                alert(`Expense category "${input.value}" added successfully!`);
+                input.value = '';
+            }
+        }
+
+        // Save NGO profile
+        function saveNGOProfile() {
+            alert('NGO profile saved successfully! All details will appear on receipts and reports.');
+        }
+
+        // Save module configuration
+        function saveModuleConfig() {
+            alert('Module configuration saved successfully! Changes will take effect immediately.');
+        }
+
+        // Security settings functions
+        function saveSecuritySettings() {
+            alert('Security settings saved successfully! Enhanced protection is now active.');
+        }
+
+        function downloadLoginReport() {
+            alert('Downloading login history report... Report will include all access logs for the past 30 days.');
+        }
+
+        // Backup and restore functions
+        function exportAllSettings() {
+            alert('Exporting complete system backup... Download will start shortly. File: SNG_Backup_2024-01-15.json');
+        }
+
+        function exportSelectedSettings() {
+            alert('Exporting selected settings... Custom backup file will be generated based on your selections.');
+        }
+
+        function selectBackupFile() {
+            alert('Please select a backup file (.json or .backup format) to restore your settings.');
+        }
+
+        function confirmFactoryReset() {
+            if (confirm('⚠️ WARNING: This will reset ALL settings to default values. This action cannot be undone. Are you sure you want to continue?')) {
+                alert('Factory reset initiated... All settings have been restored to default values.');
+            }
+        }
+
+        // Initialize first tab as active
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.sidebar-item').classList.add('gradient-bg', 'text-white');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988ec8546236a46b',t:'MTc1OTUxOTA3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
